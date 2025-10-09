@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Геноцид</title>
+    <link rel="stylesheet" href="resources/css/style.css"></link>
+</h:head>
+<h:body>
+    <h:link outcome="index" styleClass="home-link" value="На главную" />
+    <div class='container'>
+        <div class="graph">
+            <div class="graph-container" style="background: rgb(255,255,255); padding: 20px; display: inline-block; border-radius: 8px;">
+                <canvas id="board" width="500" height="500" style="border: 1px solid #ccc; cursor: crosshair;"></canvas>
+                <div id="controls">
+                    <h:form>
+                        <label><input type="radio" name="Rchange" value="1"/> R=1</label>
+                        <label><input type="radio" name="Rchange" value="2"/> R=2</label>
+                        <label><input type="radio" name="Rchange" value="3"/> R=3</label>
+                        <label><input type="radio" name="Rchange" value="4"/> R=4</label>
+                        <label><input type="radio" name="Rchange" value="5"/> R=5</label><br/>
+                        <label>Y: <input type="text" name="Ychange" id="Ychange" placeholder="от -3 до 5"/></label> <br/>
+                    <div>
+                    <!-- 1. Текстовая метка, которая просто показывает значение -->
+                    X: <h:outputText id="display" value="#{sliderBean.value}" />
+
+                    <!-- 2. Скрытое поле для отправки значения на сервер -->
+                    <h:inputHidden id="sliderInput" value="#{sliderBean.value}" />
+
+                    <!-- 3. Сам слайдер, который теперь управляет скрытым полем -->
+                    <p:slider for="sliderInput"
+                              display="display"
+                              minValue="-5"
+                              maxValue="5"
+                              step="0.1"
+                              styleClass="slider"/>
+                    </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+        <div id="results">
+            <h3>Результаты:</h3>
+            <div class="table-wrapper">
+                <table id="results-table">
+                    <thead>
+                    <tr>
+                        <th rowspan="2">X</th>
+                        <th rowspan="2">Y</th>
+                        <th rowspan="2">R</th>
+                        <th rowspan="2">Результат</th>
+                        <th colspan="1">Время начала</th>
+                        <th rowspan="2">Время выполнения (Сек)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    </div>
+</h:body>
+</html>
