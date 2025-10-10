@@ -169,8 +169,7 @@ canvas.addEventListener('click', function (e) {
         yInputField.value = y.toFixed(2);
     }
 
-    // После этого можно отправлять форму или вызывать p:remoteCommand
-    // для отправки данных (X, Y и массив R) на сервер.
+    //сделать серверную отправку
 });
 
 
@@ -178,4 +177,24 @@ document.querySelectorAll('#controls form input[type="checkbox"]').forEach(check
     checkbox.addEventListener('change', redrawCanvas);
 });
 
-window.addEventListener('load', redrawCanvas);
+window.addEventListener('load', function () {
+    redrawCanvas();
+
+    document.querySelectorAll('#controls form .ui-chkbox').forEach(function(chk) {
+        const input = chk.querySelector('input[type="checkbox"]');
+        const box = chk.querySelector('.ui-chkbox-box');
+        const icon = chk.querySelector('.ui-chkbox-icon');
+
+        if (input && box && icon) {
+            if (input.checked) {
+                // Активное состояние: синий фон + галочка
+                box.classList.add('ui-state-active');
+                icon.classList.add('ui-icon-check');
+            } else {
+                // Неактивное: убрать всё
+                box.classList.remove('ui-state-active');
+                icon.classList.remove('ui-icon-check');
+            }
+        }
+    });
+});
