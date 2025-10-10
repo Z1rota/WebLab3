@@ -71,14 +71,4 @@ public class DataBean implements Serializable {
 
         return selectedRs;
     }
-
-    public void processRequest() {
-        List<Double> selectedRs = getSelectedRs();
-        for (Double selectedR : selectedRs) {
-            System.out.println("R: " + selectedR + " X: " + this.getValue() + " Y: " + this.getText());
-
-        }
-
-
-    }
 }

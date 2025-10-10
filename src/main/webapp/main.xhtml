@@ -47,7 +47,7 @@
                         <p:commandButton id="submitButton"
                                          value="Отправить"
                                          process="@form"
-                                         action="#{dataBean.processRequest}"
+                                         action="#{collectionBean.processRequest}"
                                          update=":resultsWrapper"
                                          oncomplete="redrawCanvas()"
                                          style="margin-top: 10px;" />

@@ -151,7 +151,7 @@ canvas.addEventListener('click', function (e) {
     }
 
 
-    hiddenInput.value = clampedX;
+    hiddenInput.value = clampedX.toFixed(3);
 
     hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
 
@@ -168,8 +168,9 @@ canvas.addEventListener('click', function (e) {
     if (yInputField) {
         yInputField.value = y.toFixed(2);
     }
+    const submitButton = document.querySelector("[id$=':submitButton']");
+    submitButton.click()
 
-    //сделать серверную отправку
 });
 
 

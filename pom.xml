@@ -51,19 +51,16 @@
       <classifier>jakarta</classifier>
     </dependency>
 
-    <!-- Weld (CDI for Servlet) -->
     <dependency>
       <groupId>org.jboss.weld.servlet</groupId>
       <artifactId>weld-servlet-shaded</artifactId>
       <version>5.1.0.Final</version>
     </dependency>
 
-    <!-- JUnit 5 (опционально, но лучше чем 3.8.1) -->
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.10.0</version>
-      <scope>test</scope>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+      <version>10.17.1.0</version>
     </dependency>
   </dependencies>
 
