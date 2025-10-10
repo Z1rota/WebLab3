@@ -1,4 +1,4 @@
-/* Общие стили, скопированные для этой страницы */
+
 html {
     margin: 0;
     padding: 0;
@@ -7,11 +7,9 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background-image: url(../img/sticker.gif);
-    background-attachment: fixed;
 }
 
-/* Стили, специфичные для main.xhtml */
+
 .container {
     margin: auto auto;
     text-align: center;

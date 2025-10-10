@@ -4,10 +4,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Геноцид</title>
+    <title>Лапка</title>
+    <link rel="icon" href="resources/img/sticker.gif"/>
     <h:outputStylesheet library="css" name="main.css"/>
 </h:head>
-<h:body>
+<h:body style="background-image: url(#{resource['img/sticker.gif']}); background-attachment: fixed;">
     <h:link outcome="index" styleClass="home-link" value="На главную" />
     <div class='container'>
         <div class="graph">
@@ -15,20 +16,26 @@
                 <canvas id="board" width="500" height="500" style="border: 1px solid #ccc; cursor: crosshair;"></canvas>
                 <div id="controls">
                     <h:form>
-                        <label><input type="radio" name="Rchange" value="1"/> R=1</label>
-                        <label><input type="radio" name="Rchange" value="2"/> R=2</label>
-                        <label><input type="radio" name="Rchange" value="3"/> R=3</label>
-                        <label><input type="radio" name="Rchange" value="4"/> R=4</label>
-                        <label><input type="radio" name="Rchange" value="5"/> R=5</label><br/>
-                        <label>Y: <input type="text" name="Ychange" id="Ychange" placeholder="от -3 до 5"/></label> <br/>
+                        <p:selectBooleanCheckbox value="#{dataBean.r1}">
+                        </p:selectBooleanCheckbox> R=1
+
+                        <p:selectBooleanCheckbox value="#{dataBean.r15}">
+                        </p:selectBooleanCheckbox> R=1.5
+
+                        <p:selectBooleanCheckbox value="#{dataBean.r2}">
+                        </p:selectBooleanCheckbox> R=2
+
+                        <p:selectBooleanCheckbox value="#{dataBean.r25}">
+                        </p:selectBooleanCheckbox> R=2.5
+
+                        <p:selectBooleanCheckbox value="#{dataBean.r3}">
+                        </p:selectBooleanCheckbox> R=3
+
+                        <br/>
+                        Y: <h:inputText id="YChange" styleClass="YChange" value="#{dataBean.text}" /> <br/>
                     <div>
-                    <!-- 1. Текстовая метка, которая просто показывает значение -->
-                    X: <h:outputText id="display" value="#{sliderBean.value}" />
-
-                    <!-- 2. Скрытое поле для отправки значения на сервер -->
-                    <h:inputHidden id="sliderInput" value="#{sliderBean.value}" />
-
-                    <!-- 3. Сам слайдер, который теперь управляет скрытым полем -->
+                    X: <h:outputText id="display" value="#{dataBean.value}" />
+                    <h:inputHidden id="sliderInput" value="#{dataBean.value}" />
                     <p:slider for="sliderInput"
                               display="display"
                               minValue="-5"
@@ -63,5 +70,6 @@
         </div>
     </div>
     </div>
+    <script src="resources/js/main.js"/>
 </h:body>
 </html>
