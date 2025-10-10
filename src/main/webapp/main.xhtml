@@ -38,16 +38,25 @@
                     <h:inputHidden id="sliderInput" value="#{dataBean.value}" />
                     <p:slider for="sliderInput"
                               display="display"
+                              widgetVar="xSliderWidget"
                               minValue="-5"
                               maxValue="5"
                               step="0.1"
                               styleClass="slider"/>
                     </div>
+                        <p:commandButton id="submitButton"
+                                         value="Отправить"
+                                         process="@form"
+                                         action="#{dataBean.processRequest}"
+                                         update=":resultsWrapper"
+                                         oncomplete="redrawCanvas()"
+                                         style="margin-top: 10px;" />
                     </h:form>
                 </div>
             </div>
         </div>
 
+        <h:panelGroup id="resultsWrapper" layout="block">
         <div id="results">
             <h3>Результаты:</h3>
             <div class="table-wrapper">
@@ -69,7 +78,10 @@
                 </table>
         </div>
     </div>
+        </h:panelGroup>
     </div>
     <script src="resources/js/main.js"/>
+    <script src="resources/js/graph.js"/>
+    <script src="resources/js/utils.js"/>
 </h:body>
 </html>

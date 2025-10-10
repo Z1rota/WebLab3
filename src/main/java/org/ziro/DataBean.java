@@ -1,14 +1,17 @@
 package org.ziro;
 
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named
-@ViewScoped
+@SessionScoped
 public class DataBean implements Serializable {
-    private boolean r1 = true;  // по умолчанию R=1 выбрано
+    private boolean r1 = false;
     private boolean r15 = false;
     private boolean r2 = false;
     private boolean r25 = false;
@@ -47,12 +50,35 @@ public class DataBean implements Serializable {
     public void setR3(boolean r3) { this.r3 = r3; }
 
 
-    public Double getSelectedR() {
-        if (r1) return 1d;
-        if (r15) return 1.5d;
-        if (r2) return 2d;
-        if (r25) return 2.5d;
-        if (r3) return 3d;
-        return null;
+    public List<Double> getSelectedRs() {
+        List<Double> selectedRs = new ArrayList<>();
+
+        if (r1) {
+            selectedRs.add(1.0);
+        }
+        if (r15) {
+            selectedRs.add(1.5);
+        }
+        if (r2) {
+            selectedRs.add(2.0);
+        }
+        if (r25) {
+            selectedRs.add(2.5);
+        }
+        if (r3) {
+            selectedRs.add(3.0);
+        }
+
+        return selectedRs;
+    }
+
+    public void processRequest() {
+        List<Double> selectedRs = getSelectedRs();
+        for (Double selectedR : selectedRs) {
+            System.out.println("R: " + selectedR + " X: " + this.getValue() + " Y: " + this.getText());
+
+        }
+
+
     }
 }
