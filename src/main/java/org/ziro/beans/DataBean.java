@@ -1,7 +1,6 @@
-package org.ziro;
+package org.ziro.beans;
 
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
 import java.io.Serializable;

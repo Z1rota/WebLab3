@@ -25,7 +25,7 @@ body {
 }
 
 #main-container {
-    background: linear-gradient(135deg, rgba(173, 216, 230, 0.9), rgba(224, 255, 255, 0.9));
+    background: linear-gradient(135deg, rgba(173, 216, 230, 0.4), rgba(224, 255, 255, 0.4));
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -40,7 +40,6 @@ body {
     font-size: 16px;
     font-weight: 600;
     color: #333;
-    border-bottom: 2px solid #add8e6;
 }
 
 .header-body {
@@ -55,7 +54,6 @@ body {
     justify-content: space-between;
     width: 100%;
     padding-top: 10px;
-    border-top: 1px dashed #c0e0f0;
 }
 
 .center-aligned,
@@ -68,7 +66,7 @@ body {
 .header-footer .right-aligned a {
     display: inline-block;
     padding: 5px 15px;
-    background-color: rgba(71, 179, 39, 0.67);
+    background-color: rgb(128, 0, 128,0.67);
     color: rgb(255, 255, 255);
     text-decoration: none;
     border-radius: 5px;
