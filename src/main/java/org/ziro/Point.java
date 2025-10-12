@@ -14,20 +14,49 @@ public class Point {
     public double x;
     public double y;
     public double r;
-    public boolean isHit;
+    public boolean hit;
     public String startTime;
     public double executionTime;
 
-    public Point(double x, double y, double r, boolean isHit, String startTime, double executionTime) {
+    public Point(double x, double y, double r, boolean hit, String startTime, double executionTime) {
         this.x = x;
         this.y = y;
         this.r = r;
-        this.isHit = isHit;
+        this.hit = hit;
         this.startTime = startTime;
         this.executionTime = executionTime;
     }
 
     public Point() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getR() {
+        return r;
+    }
+
+    // Для boolean — isHit()
+    public boolean isHit() {
+        return hit;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public double getExecutionTime() {
+        return executionTime;
     }
 }

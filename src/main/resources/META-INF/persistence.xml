@@ -8,7 +8,6 @@
     <persistence-unit name="Derby" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- Подключение к embedded Derby -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:derby:pointsDB;create=true"/>
@@ -16,7 +15,6 @@
             <property name="jakarta.persistence.jdbc.password" value=""/>
             <property name="hibernate.type.format.jsonb.enabled" value="false"/>
 
-            <!-- Hibernate-specific -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>

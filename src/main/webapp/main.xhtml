@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">>
 <h:head>
     <title>Лапка</title>
     <link rel="icon" href="resources/img/sticker.gif"/>
@@ -16,34 +17,28 @@
                 <canvas id="board" width="500" height="500" style="border: 1px solid #ccc; cursor: crosshair;"></canvas>
                 <div id="controls">
                     <h:form>
-                        <p:selectBooleanCheckbox value="#{dataBean.r1}">
-                        </p:selectBooleanCheckbox> R=1
-
-                        <p:selectBooleanCheckbox value="#{dataBean.r15}">
-                        </p:selectBooleanCheckbox> R=1.5
-
-                        <p:selectBooleanCheckbox value="#{dataBean.r2}">
-                        </p:selectBooleanCheckbox> R=2
-
-                        <p:selectBooleanCheckbox value="#{dataBean.r25}">
-                        </p:selectBooleanCheckbox> R=2.5
-
-                        <p:selectBooleanCheckbox value="#{dataBean.r3}">
-                        </p:selectBooleanCheckbox> R=3
+                        <!-- чекбоксы R -->
+                        <p:selectBooleanCheckbox value="#{dataBean.r1}"/> R=1
+                        <p:selectBooleanCheckbox value="#{dataBean.r15}"/> R=1.5
+                        <p:selectBooleanCheckbox value="#{dataBean.r2}"/> R=2
+                        <p:selectBooleanCheckbox value="#{dataBean.r25}"/> R=2.5
+                        <p:selectBooleanCheckbox value="#{dataBean.r3}"/> R=3
 
                         <br/>
                         Y: <h:inputText id="YChange" styleClass="YChange" value="#{dataBean.text}" /> <br/>
-                    <div>
-                    X: <h:outputText id="display" value="#{dataBean.value}" />
-                    <h:inputHidden id="sliderInput" value="#{dataBean.value}" />
-                    <p:slider for="sliderInput"
-                              display="display"
-                              widgetVar="xSliderWidget"
-                              minValue="-5"
-                              maxValue="5"
-                              step="0.1"
-                              styleClass="slider"/>
-                    </div>
+
+                        <div>
+                            X: <h:outputText id="display" value="#{dataBean.value}" />
+                            <h:inputHidden id="sliderInput" value="#{dataBean.value}" />
+                            <p:slider for="sliderInput"
+                                      display="display"
+                                      widgetVar="xSliderWidget"
+                                      minValue="-5"
+                                      maxValue="5"
+                                      step="0.1"
+                                      styleClass="slider"/>
+                        </div>
+
                         <p:commandButton id="submitButton"
                                          value="Отправить"
                                          process="@form"
@@ -51,6 +46,13 @@
                                          update=":resultsWrapper"
                                          oncomplete="redrawCanvas()"
                                          style="margin-top: 10px;" />
+
+                        <!-- КНОПКА ОЧИСТКИ -->
+                        <p:commandButton id="clearButton"
+                                         value="Очистить таблицу"
+                                         action="#{collectionBean.clearDataBase}"
+                                         update=":resultsWrapper"
+                                         style="margin-top: 10px; margin-left: 10px;" />
                     </h:form>
                 </div>
             </div>
@@ -63,17 +65,31 @@
                 <table id="results-table">
                     <thead>
                     <tr>
-                        <th rowspan="2">X</th>
-                        <th rowspan="2">Y</th>
-                        <th rowspan="2">R</th>
-                        <th rowspan="2">Результат</th>
-                        <th colspan="1">Время начала</th>
-                        <th rowspan="2">Время выполнения (Сек)</th>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Результат</th>
+                        <th>Время начала</th>
+                        <th>Время выполнения (Мс)</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                    </tr>
+                    <ui:repeat value="#{collectionBean.points}" var="item">
+                        <tr>
+                            <td>#{item.x}</td>
+                            <td>#{item.y}</td>
+                            <td>#{item.r}</td>
+                            <td>#{item.hit ? 'Попадание' : 'Мимо'}</td>
+                            <td>#{item.startTime}</td>
+                            <td>#{item.executionTime}</td>
+                        </tr>
+                    </ui:repeat>
+
+                    <ui:fragment rendered="#{empty collectionBean.points}">
+                        <tr>
+                            <td colspan="6" style="text-align: center;">Нет данных</td>
+                        </tr>
+                    </ui:fragment>
                     </tbody>
                 </table>
         </div>

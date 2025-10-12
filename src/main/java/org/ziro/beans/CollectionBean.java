@@ -12,6 +12,7 @@ import org.ziro.Point;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -19,6 +20,7 @@ import java.util.List;
 public class CollectionBean {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("Derby");
     EntityManager em = emf.createEntityManager();
+    List points = new ArrayList<Point>();
 
 
 
@@ -38,8 +40,11 @@ public class CollectionBean {
                 double y=Double.parseDouble(dataBean.getText());
                 boolean hit = hitChecker.isHit(selectedR,x,y);
                 double executionTime = (System.nanoTime()-start)/1_000_000.0;
+
                 String startTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+
                 Point point = new Point(x, y,selectedR,hit,startTime,executionTime);
+
                 addtoDataBase(point);
 
             } catch (NumberFormatException e) {
@@ -47,15 +52,8 @@ public class CollectionBean {
 
             }
         }
-        List<Point> points = em.createQuery("SELECT p FROM Point p", Point.class).getResultList();
-        System.out.println("Загружено точек: " + points.size());
-        for (Point p : points) {
-            System.out.println("ID: " + p.id + ", (" + p.x + ", " + p.y + ", "+p.r + ", "+p.isHit+", "+p.startTime+", " +
-                    ""+p.executionTime+")");
-        }
 
     }
-
 
     public void addtoDataBase(Point point) {
         this.em.getTransaction().begin();
@@ -67,5 +65,14 @@ public class CollectionBean {
         em.getTransaction().begin();
         em.createQuery("DELETE FROM Point").executeUpdate();
         em.getTransaction().commit();
+        points.clear();
     }
+
+    public List<Point> getPoints() {
+        em.getTransaction().begin();
+        points = em.createQuery("SELECT p FROM Point p").getResultList();
+        em.getTransaction().commit();
+        return points;
+    }
+
 }
