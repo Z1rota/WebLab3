@@ -39,6 +39,7 @@ function redrawCanvas() {
         const color = colors[index % colors.length];
         drawShape(r, color);
     });
+    drawSavedPoints();
 }
 
 
@@ -199,3 +200,35 @@ window.addEventListener('load', function () {
         }
     });
 });
+
+function drawSavedPoints() {
+    const rows = document.querySelectorAll('#results-table tbody tr');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        // Пропускаем строку "Нет данных"
+        if (cells.length < 6 || cells[0].colSpan === '6') return;
+
+        const xText = cells[0]?.textContent?.trim();
+        const yText = cells[1]?.textContent?.trim();
+        const resultText = cells[3]?.textContent?.trim();
+
+        const x = parseFloat(xText);
+        const y = parseFloat(yText);
+        const isHit = resultText === 'Попадание';
+
+        if (isNaN(x) || isNaN(y)) return;
+
+        // Преобразуем логические координаты в пиксели (как в convertCanvasToSystem, но наоборот)
+        const xPixel = originX + x * scale;
+        const yPixel = originY - y * scale; // инверсия Y
+
+        // Рисуем точку
+        ctx.beginPath();
+        ctx.arc(xPixel, yPixel, 5, 0, Math.PI * 2);
+        ctx.fillStyle = isHit ? 'green' : 'red';
+        ctx.fill();
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    });
+}
