@@ -32,10 +32,11 @@ public class CollectionBean {
 
 
     public void processRequest() {
-        double start = System.nanoTime();
+
         List<Double> selectedRs = dataBean.getSelectedRs();
         for (Double selectedR : selectedRs) {
             try {
+                double start = System.nanoTime();
                 double x = dataBean.getValue();
                 double y=Double.parseDouble(dataBean.getText());
                 boolean hit = hitChecker.isHit(selectedR,x,y);
@@ -66,6 +67,7 @@ public class CollectionBean {
         em.createQuery("DELETE FROM Point").executeUpdate();
         em.getTransaction().commit();
         points.clear();
+        PrimeFaces.current().executeScript("redrawCanvas()");
     }
 
     public List<Point> getPoints() {
